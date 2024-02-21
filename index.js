@@ -25,7 +25,7 @@ const main =async()=>{
         })
         const io =  socket(server, {
             cors: {
-                origin: 'http://localhost:3000',
+                origin: 'https://techwiz-official.onrender.com',
                 methods: ['GET', 'POST'],
             },
         })
