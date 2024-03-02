@@ -10,10 +10,10 @@ const PORT = process.env.PORT || 3400
 
 app.use(cors())
 app.use(express.json())
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', 'https://zenchat-aalan.onrender.com');
-//     next();
-// })
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://techwiz-official.onrender.com');
+    next();
+})
 
 const main =async()=>{
     try {
