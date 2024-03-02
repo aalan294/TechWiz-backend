@@ -10,10 +10,10 @@ const PORT = process.env.PORT || 3400
 
 app.use(cors())
 app.use(express.json())
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://techwiz-official.onrender.com');
-    next();
-})
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'https://techwiz-official.onrender.com');
+//     next();
+// })
 
 const main =async()=>{
     try {
@@ -29,6 +29,12 @@ const main =async()=>{
                 methods: ['GET', 'POST'],
             },
         })
+        // const io =  socket(server, {
+        //     cors: {
+        //         origin: 'http://localhost:3000',
+        //         methods: ['GET', 'POST'],
+        //     },
+        // })
         global.onlineUsers = new Map();
 
         io.on('connection', (socket) => {
