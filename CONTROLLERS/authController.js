@@ -25,10 +25,10 @@ const register =async(req,res)=>{
        const checkEmail = await userSchema.findOne({email})
        const checkUsername = await userSchema.findOne({username})
        if(checkEmail){
-        return res.json({message:"This email is already registered",status:false})
+        return res.json({msg:"This email is already registered",status:false})
        }
        if(checkUsername){
-        return res.json({message:"This username is already registered",status:false})
+        return res.json({msg:"This username is already registered",status:false})
        }
        const hashedPassword = await bcrypt.hash(password,10)
        const newUser = {username,
@@ -62,7 +62,7 @@ const register =async(req,res)=>{
           })
        }
     } catch (error) {
-        res.status(401).json({message: `${error.message}`,status:"error"})
+        res.status(401).json({msg: `${error.message}`,status:"error"})
     }
 }
 
@@ -71,11 +71,11 @@ const login = async(req,res)=>{
        const {email,password} = req.body
        const user = await userSchema.findOne({email})
        if(!user){
-        return res.json({message:"user not found",status:false})
+        return res.json({msg:"user not found",status:false})
        }
        const match = await bcrypt.compare(password,user.password)
        if(!match){
-        return res.json({message:"Invalid Password",status:false})
+        return res.json({msg:"Invalid Password",status:false})
        }
        const token = jwt.sign({"username": user.username},process.env.JWT,{expiresIn: '1d'})
        const userObject = user.toObject()
@@ -83,7 +83,7 @@ const login = async(req,res)=>{
        userObject.token = token;
        res.status(201).json({user:userObject,status:true})
     } catch (error) {
-        res.status(401).json({message: `${error.message}`,status:false})
+        res.status(401).json({msg: `${error.message}`,status:false})
     }
 }
 
